@@ -1,2 +1,530 @@
-!function(){function e(e,t,n,s,r,a,o){try{var i=e[a](o),c=i.value}catch(e){return void n(e)}i.done?t(c):Promise.resolve(c).then(s,r)}function t(t){return function(){var n=this,s=arguments;return new Promise((function(r,a){var o=t.apply(n,s);function i(t){e(o,r,a,i,c,"next",t)}function c(t){e(o,r,a,i,c,"throw",t)}i(void 0)}))}}function n(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function s(e,t){for(var n=0;n<t.length;n++){var s=t[n];s.enumerable=s.enumerable||!1,s.configurable=!0,"value"in s&&(s.writable=!0),Object.defineProperty(e,s.key,s)}}function r(e,t,n){return t&&s(e.prototype,t),n&&s(e,n),e}function a(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var o,i;function c(e,t,n,s){return p.apply(this,arguments)}function p(){return(p=t(regeneratorRuntime.mark((function e(t,n,s,r){return regeneratorRuntime.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:e.t0=t,e.next="RegisterPayment"===e.t0?3:"GetPaymentState"===e.t0?6:9;break;case 3:return e.next=5,d(s,r);case 5:return e.abrupt("break",10);case 6:return e.next=8,u(s,r);case 8:return e.abrupt("break",10);case 9:throw new Error("The method "+t+" is not supported.");case 10:case"end":return e.stop()}}),e)})))).apply(this,arguments)}function d(e,t){var n=t.EndpointUrl;return new Promise((function(t,s){new i.KotakAPIWrapper(n).registerPayment(e).then((function(e){console.log(e),postResult(m(e)),t()})).catch((function(e){console.log(e),postResult(m(e)),s(e)}))}))}function u(e,t){var n=t.EndpointUrl;return new Promise((function(t,s){new i.KotakAPIWrapper(n).getPaymentState(e).then((function(e){console.log(e),postResult(m(e)),t()})).catch((function(e){console.log(e),postResult(m(e)),s(e)}))}))}function m(e){return{messageId:e.messageId,statusCode:e.statusCode,statusDescription:e.statusDescription,errorCode:e.errorCode,errorDescription:e.errorDescription,debugRequest:e.debugRequest,debugResponse:e.debugResponse}}!function(e){var t=function e(){n(this,e),a(this,"messageId",void 0),a(this,"statusCode",void 0),a(this,"statusDescription",void 0),a(this,"errorCode",void 0),a(this,"errorDescription",void 0),a(this,"debugRequest",void 0),a(this,"debugResponse",void 0),this.errorCode="",this.statusCode=""};e.KotakResponse=t;var s=function(){function e(t){n(this,e),a(this,"_paymentActionHeader",void 0),a(this,"_reversalActionHeader",void 0),a(this,"_endpoint",void 0),this._paymentActionHeader="/BusinessServices/StarterProcesses/CMS_Generic_Service.serviceagent/Payment",this._reversalActionHeader="/BusinessServices/StarterProcesses/CMS_Generic_Service.serviceagent/Reversal",this._endpoint=t}return r(e,[{key:"registerPayment",value:function(e){var n=e.RequestHeader,s=e.InstrumentList.instrument,r='<?xml version="1.0" encoding="utf-8"?>\n<soap:Envelope\n    xmlns:soap="http://www.w3.org/2003/05/soap-envelope"\n    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n    xmlns:ns0="http://www.kotak.com/schemas/CMS_Generic/Payment_Request.xsd"\n    xmlns:ns1="http://www.kotak.com/schemas/CMS_Generic/Payment_Response.xsd"\n    xmlns:ns2="http://www.kotak.com/schemas/CMS_Generic/Reversal_Request.xsd"\n    xmlns:ns3="http://www.kotak.com/schemas/CMS_Generic/Reversal_Response.xsd"\n    xmlns:tns="http://xmlns.kotak.com/CMS_Generic_Service">\n    <soap:Body>\n        <ns0:Payment\n            xmlns:ns0="http://www.kotak.com/schemas/CMS_Generic/Payment_Request.xsd"\n            xmlns="http://www.kotak.com/schemas/CMS_Generic/Payment_Request.xsd">\n            <ns0:RequestHeader>\n                <ns0:MessageId>'.concat(n.MessageId,"</ns0:MessageId>\n                <ns0:MsgSource>").concat(n.MsgSource,"</ns0:MsgSource>\n                <ns0:ClientCode>").concat(n.ClientCode,"</ns0:ClientCode>\n                <ns0:BatchRefNmbr>").concat(n.BatchRefNmbr,"</ns0:BatchRefNmbr>\n            </ns0:RequestHeader>\n            <ns0:InstrumentList>\n                <ns0:instrument>\n                    <ns0:InstRefNo>").concat(s.InstRefNo,"</ns0:InstRefNo>\n                    <ns0:MyProdCode>").concat(s.MyProdCode,"</ns0:MyProdCode>\n                    <ns0:PayMode>").concat(s.PayMode,"</ns0:PayMode>\n                    <ns0:TxnAmnt>").concat(s.TxnAmnt,"</ns0:TxnAmnt>\n                    <ns0:AccountNo>").concat(s.AccountNo,"</ns0:AccountNo>\n                    <ns0:DrDesc>").concat(s.DrDesc,"</ns0:DrDesc>\n                    <ns0:PaymentDt>").concat(s.PaymentDt,"</ns0:PaymentDt>\n                    <ns0:RecBrCd>").concat(s.RecBrCd,"</ns0:RecBrCd>\n                    <ns0:BeneAcctNo>").concat(s.BeneAcctNo,"</ns0:BeneAcctNo>\n                    <ns0:BeneName>").concat(s.BeneName,"</ns0:BeneName>\n                    <ns0:InstDt>").concat(s.InstDt,"</ns0:InstDt>\n                    <ns0:PaymentDtl1>").concat(s.PaymentDtl1,"</ns0:PaymentDtl1>\n                    <ns0:EnrichmentSet>\n                        <ns0:Enrichment>").concat(s.EnrichmentSet.Enrichment,"</ns0:Enrichment>\n                    </ns0:EnrichmentSet>\n                </ns0:instrument>\n            </ns0:InstrumentList>\n        </ns0:Payment>\n    </soap:Body>\n</soap:Envelope>"),a=this._endpoint,o=this._paymentActionHeader;return new Promise((function(e,s){var i=new t;i.messageId=n.MessageId,i.debugRequest=r;var c=new XMLHttpRequest;c.onreadystatechange=function(){try{if(4!==c.readyState)return;if(200!==c.status)throw new Error("Failed with status "+c.status+"; "+c.responseText);i.debugResponse=c.responseText;var t=n.MessageId;i.errorCode="0",i.messageId=t,i.statusCode="statusCode00",i.statusDescription="statusDesc00",e(i)}catch(e){i.errorCode="-1",i.errorDescription=e.message,s(i)}},c.open("POST",a),c.setRequestHeader("Content-Type","application/soap+xml"),c.setRequestHeader("action",o),c.send(r)}))}},{key:"getPaymentState",value:function(e){var n='<?xml version="1.0" encoding="utf-8"?>\n<soap:Envelope\n    xmlns:soap="http://www.w3.org/2003/05/soap-envelope"\n    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n    xmlns:ns0="http://www.kotak.com/schemas/CMS_Generic/Payment_Request.xsd"\n    xmlns:ns1="http://www.kotak.com/schemas/CMS_Generic/Payment_Response.xsd"\n    xmlns:ns2="http://www.kotak.com/schemas/CMS_Generic/Reversal_Request.xsd"\n    xmlns:ns3="http://www.kotak.com/schemas/CMS_Generic/Reversal_Response.xsd"\n    xmlns:tns="http://xmlns.kotak.com/CMS_Generic_Service">\n    <soap:Body>\n        <ns2:Reversal\n            xmlns:ns2="http://www.kotak.com/schemas/CMS_Generic/Reversal_Request.xsd"\n            xmlns="http://www.kotak.com/schemas/CMS_Generic/Reversal_Request.xsd">\n            <ns2:Header>\n                <ns2:Req_Id>'.concat(e.Header.Req_Id,"</ns2:Req_Id>\n                <ns2:Msg_Src>").concat(e.Header.Msg_Src,"</ns2:Msg_Src>\n                <ns2:Client_Code>").concat(e.Header.Client_Code,"</ns2:Client_Code>\n                <ns2:Date_Post>").concat(e.Header.Date_Post,"</ns2:Date_Post>\n            </ns2:Header>\n            <ns2:Details>\n                <ns2:Msg_Id>").concat(e.Details.Msg_Id,"</ns2:Msg_Id>\n            </ns2:Details>\n        </ns2:Reversal>\n    </soap:Body>\n</soap:Envelope>"),s=this._endpoint,r=this._reversalActionHeader;return new Promise((function(a,o){var i=new t;i.messageId=e.Header.Req_Id,i.debugRequest=n;var c=new XMLHttpRequest;c.onreadystatechange=function(){try{if(4!==c.readyState)return;if(200!==c.status)throw new Error("Failed with status "+c.status+"; "+c.responseText);i.debugResponse=c.responseText;var t=e.Header.Req_Id;i.errorCode="0",i.messageId=t,i.statusCode="statusCode00",i.statusDescription="statusDesc00",a(i)}catch(e){i.errorCode="-1",i.errorDescription=e.message,o(i)}},c.open("POST",s),c.setRequestHeader("Content-Type","application/soap+xml"),c.setRequestHeader("action",r),c.send(n)}))}}]),e}();e.KotakHTTPAPI=s}(o||(o={})),function(e){var t=function(){function e(t){n(this,e),a(this,"_api",void 0),this._api=new o.KotakHTTPAPI(t)}return r(e,[{key:"registerPayment",value:function(e){var t=this,n=e.pMessageId,s=e.pMessageSource,r=e.pClientCode,a=e.pTxnAmount,o=e.pAccountNo,i=e.pRecBrCd,c=e.pPaymentDt,p=e.pBeneAccountNo,d={RequestHeader:{MessageId:n,MsgSource:s,ClientCode:r,BatchRefNmbr:n},InstrumentList:{instrument:{InstRefNo:n,MyProdCode:"WPAY",PayMode:"NEFT",TxnAmnt:a,AccountNo:o,DrDesc:e.pDrDesc,PaymentDt:c,RecBrCd:i,BeneAcctNo:p,BeneName:e.pBeneName,InstDt:e.pInstDate,PaymentDtl1:e.pPaymentDtl1,EnrichmentSet:{Enrichment:e.pEnrichment}}}};return new Promise((function(e,n){t._api.registerPayment(d).then((function(t){e(t)})).catch((function(e){n(e)}))}))}},{key:"getPaymentState",value:function(e){var t=this,n=e.pMessageId,s={Header:{Req_Id:n,Msg_Src:e.pMessageSource,Client_Code:e.pClientCode,Date_Post:""},Details:{Msg_Id:n}};return new Promise((function(e,n){t._api.getPaymentState(s).then((function(t){e(t)})).catch((function(e){n(e)}))}))}}]),e}();e.KotakAPIWrapper=t}(i||(i={})),metadata={systemName:"KotakBankAPI",displayName:"Kotak Bank API",description:"An example broker that accesses to Kotak Bank API.",configuration:{EndpointUrl:{displayName:"Endpoint Url",type:"string",value:"https://apigwuat.kotak.com:8443/cms_generic_service?apikey=l7xx9e2c880d0b4549049ff62c5bf595c310"},Param2:{displayName:"Param2",type:"string",value:"param2 default value"}}},ondescribe=function(){var e=t(regeneratorRuntime.mark((function e(t){return regeneratorRuntime.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:t.configuration,postSchema({objects:{KotakBankAPI:{displayName:"Kotak Bank payment API",description:"Kotak Bank payment API",properties:{messageId:{displayName:"messageId",type:"string"},statusCode:{displayName:"statusCode",type:"string"},statusDescription:{displayName:"statusDescription",type:"string"},errorCode:{displayName:"errorCode",type:"string"},errorDescription:{displayName:"errorDescription",type:"string"},debugRequest:{displayName:"debugRequest",type:"string"},debugResponse:{displayName:"debugResponse",type:"string"}},methods:{RegisterPayment:{displayName:"Perform payment request",type:"execute",parameters:{pMessageId:{displayName:"pMessageId",description:"Message Id",type:"string"},pMessageSource:{displayName:"pMessageSource",description:"Message Source",type:"string"},pClientCode:{displayName:"pClientCode",description:"Client Code",type:"string"},pTxnAmount:{displayName:"pTxnAmount",description:"Transaction amount",type:"number"},pAccountNo:{displayName:"pAccountNo",description:"Account No",type:"string"},pRecBrCd:{displayName:"pRecBrCd",description:"RecBrCd",type:"string"},pPaymentDt:{displayName:"pPaymentDt",description:"Payment Date",type:"string"},pBeneAccountNo:{displayName:"pBeneAccountNo",description:"Bene account No",type:"string"},pDrDesc:{displayName:"pDrDesc",description:"DrDesc",type:"string"},pBeneName:{displayName:"pBeneName",description:"BeneName",type:"string"},pInstDate:{displayName:"pInstDate",description:"InstDt",type:"string"},pPaymentDtl1:{displayName:"pPaymentDtl1",description:"pPaymentDtl1",type:"string"},pEnrichment:{displayName:"pEnrichment",description:"pEnrichment",type:"string"}},requiredParameters:["pMessageId","pMessageSource","pClientCode","pTxnAmount"],outputs:["messageId","statusCode","statusDescription","errorCode","errorDescription","debugRequest","debugResponse"]},GetPaymentState:{displayName:"Get payment state",type:"read",parameters:{pMessageId:{displayName:"pMessageId",description:"Message Id",type:"string"},pMessageSource:{displayName:"pMessageSource",description:"Message Source",type:"string"},pClientCode:{displayName:"pClientCode",description:"Client Code",type:"string"}},requiredParameters:["pMessageId","pMessageSource","pClientCode"],outputs:["messageId","statusCode","statusDescription","errorCode","errorDescription","debugRequest","debugResponse"]}}}}});case 2:case"end":return e.stop()}}),e)})));return function(t){return e.apply(this,arguments)}}(),onexecute=function(){var e=t(regeneratorRuntime.mark((function e(t){var n,s,r,a,o;return regeneratorRuntime.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:n=t.objectName,s=t.methodName,r=t.parameters,a=t.properties,o=t.configuration,t.schema,e.t0=n,e.next="KotakBankAPI"===e.t0?4:7;break;case 4:return e.next=6,c(s,a,r,o);case 6:return e.abrupt("break",8);case 7:throw new Error("The object "+n+" is not supported.");case 8:case"end":return e.stop()}}),e)})));return function(t){return e.apply(this,arguments)}}()}();
+(function () {
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  let KotakAPIModule;
+
+  (function (_KotakAPIModule) {
+    class KotakResponse {
+      constructor() {
+        _defineProperty(this, "messageId", void 0);
+
+        _defineProperty(this, "statusCode", void 0);
+
+        _defineProperty(this, "statusDescription", void 0);
+
+        _defineProperty(this, "errorCode", void 0);
+
+        _defineProperty(this, "errorDescription", void 0);
+
+        _defineProperty(this, "debugRequest", void 0);
+
+        _defineProperty(this, "debugResponse", void 0);
+
+        this.errorCode = "";
+        this.statusCode = "";
+      }
+
+    }
+
+    _KotakAPIModule.KotakResponse = KotakResponse;
+
+    class KotakHTTPAPI {
+      constructor(baseUrl) {
+        _defineProperty(this, "_paymentActionHeader", void 0);
+
+        _defineProperty(this, "_reversalActionHeader", void 0);
+
+        _defineProperty(this, "_endpoint", void 0);
+
+        this._paymentActionHeader = "/BusinessServices/StarterProcesses/CMS_Generic_Service.serviceagent/Payment";
+        this._reversalActionHeader = "/BusinessServices/StarterProcesses/CMS_Generic_Service.serviceagent/Reversal";
+        this._endpoint = baseUrl;
+      }
+
+      registerPayment(request) {
+        var header = request.RequestHeader;
+        var instrument = request.InstrumentList.instrument;
+        var body = `<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope
+    xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ns0="http://www.kotak.com/schemas/CMS_Generic/Payment_Request.xsd"
+    xmlns:ns1="http://www.kotak.com/schemas/CMS_Generic/Payment_Response.xsd"
+    xmlns:ns2="http://www.kotak.com/schemas/CMS_Generic/Reversal_Request.xsd"
+    xmlns:ns3="http://www.kotak.com/schemas/CMS_Generic/Reversal_Response.xsd"
+    xmlns:tns="http://xmlns.kotak.com/CMS_Generic_Service">
+    <soap:Body>
+        <ns0:Payment
+            xmlns:ns0="http://www.kotak.com/schemas/CMS_Generic/Payment_Request.xsd"
+            xmlns="http://www.kotak.com/schemas/CMS_Generic/Payment_Request.xsd">
+            <ns0:RequestHeader>
+                <ns0:MessageId>${header.MessageId}</ns0:MessageId>
+                <ns0:MsgSource>${header.MsgSource}</ns0:MsgSource>
+                <ns0:ClientCode>${header.ClientCode}</ns0:ClientCode>
+                <ns0:BatchRefNmbr>${header.BatchRefNmbr}</ns0:BatchRefNmbr>
+            </ns0:RequestHeader>
+            <ns0:InstrumentList>
+                <ns0:instrument>
+                    <ns0:InstRefNo>${instrument.InstRefNo}</ns0:InstRefNo>
+                    <ns0:MyProdCode>${instrument.MyProdCode}</ns0:MyProdCode>
+                    <ns0:PayMode>${instrument.PayMode}</ns0:PayMode>
+                    <ns0:TxnAmnt>${instrument.TxnAmnt}</ns0:TxnAmnt>
+                    <ns0:AccountNo>${instrument.AccountNo}</ns0:AccountNo>
+                    <ns0:DrDesc>${instrument.DrDesc}</ns0:DrDesc>
+                    <ns0:PaymentDt>${instrument.PaymentDt}</ns0:PaymentDt>
+                    <ns0:RecBrCd>${instrument.RecBrCd}</ns0:RecBrCd>
+                    <ns0:BeneAcctNo>${instrument.BeneAcctNo}</ns0:BeneAcctNo>
+                    <ns0:BeneName>${instrument.BeneName}</ns0:BeneName>
+                    <ns0:InstDt>${instrument.InstDt}</ns0:InstDt>
+                    <ns0:PaymentDtl1>${instrument.PaymentDtl1}</ns0:PaymentDtl1>
+                    <ns0:EnrichmentSet>
+                        <ns0:Enrichment>${instrument.EnrichmentSet.Enrichment}</ns0:Enrichment>
+                    </ns0:EnrichmentSet>
+                </ns0:instrument>
+            </ns0:InstrumentList>
+        </ns0:Payment>
+    </soap:Body>
+</soap:Envelope>`;
+        var _ep = this._endpoint;
+        var _action = this._paymentActionHeader;
+        return new Promise((resolve, reject) => {
+          var rr = new KotakResponse();
+          rr.messageId = header.MessageId;
+          rr.debugRequest = body;
+          var xhr = new XMLHttpRequest();
+
+          xhr.onreadystatechange = function () {
+            try {
+              if (xhr.readyState !== 4) return;
+              if (xhr.status !== 200) throw new Error("Failed with status " + xhr.status + "; " + xhr.responseText);
+              rr.debugResponse = xhr.responseText;
+              var msgId = header.MessageId;
+              var statusCode = "statusCode00";
+              var statusDesc = "statusDesc00";
+              rr.errorCode = "0";
+              rr.messageId = msgId;
+              rr.statusCode = statusCode;
+              rr.statusDescription = statusDesc;
+              resolve(rr);
+            } catch (e) {
+              rr.errorCode = "-1";
+              rr.errorDescription = e.message;
+              reject(rr);
+            }
+          };
+
+          xhr.open("POST", _ep);
+          xhr.setRequestHeader('Content-Type', 'application/soap+xml');
+          xhr.setRequestHeader('action', _action);
+          xhr.send(body);
+        });
+      }
+
+      getPaymentState(request) {
+        var body = `<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope
+    xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ns0="http://www.kotak.com/schemas/CMS_Generic/Payment_Request.xsd"
+    xmlns:ns1="http://www.kotak.com/schemas/CMS_Generic/Payment_Response.xsd"
+    xmlns:ns2="http://www.kotak.com/schemas/CMS_Generic/Reversal_Request.xsd"
+    xmlns:ns3="http://www.kotak.com/schemas/CMS_Generic/Reversal_Response.xsd"
+    xmlns:tns="http://xmlns.kotak.com/CMS_Generic_Service">
+    <soap:Body>
+        <ns2:Reversal
+            xmlns:ns2="http://www.kotak.com/schemas/CMS_Generic/Reversal_Request.xsd"
+            xmlns="http://www.kotak.com/schemas/CMS_Generic/Reversal_Request.xsd">
+            <ns2:Header>
+                <ns2:Req_Id>${request.Header.Req_Id}</ns2:Req_Id>
+                <ns2:Msg_Src>${request.Header.Msg_Src}</ns2:Msg_Src>
+                <ns2:Client_Code>${request.Header.Client_Code}</ns2:Client_Code>
+                <ns2:Date_Post>${request.Header.Date_Post}</ns2:Date_Post>
+            </ns2:Header>
+            <ns2:Details>
+                <ns2:Msg_Id>${request.Details.Msg_Id}</ns2:Msg_Id>
+            </ns2:Details>
+        </ns2:Reversal>
+    </soap:Body>
+</soap:Envelope>`;
+        var _ep = this._endpoint;
+        var _action = this._reversalActionHeader;
+        return new Promise((resolve, reject) => {
+          var rr = new KotakResponse();
+          rr.messageId = request.Header.Req_Id;
+          rr.debugRequest = body;
+          var xhr = new XMLHttpRequest();
+
+          xhr.onreadystatechange = function () {
+            try {
+              if (xhr.readyState !== 4) return;
+              if (xhr.status !== 200) throw new Error("Failed with status " + xhr.status + "; " + xhr.responseText);
+              rr.debugResponse = xhr.responseText;
+              var msgId = request.Header.Req_Id;
+              var statusCode = "statusCode00";
+              var statusDesc = "statusDesc00";
+              rr.errorCode = "0";
+              rr.messageId = msgId;
+              rr.statusCode = statusCode;
+              rr.statusDescription = statusDesc;
+              resolve(rr);
+            } catch (e) {
+              rr.errorCode = "-1";
+              rr.errorDescription = e.message;
+              reject(rr);
+            }
+          };
+
+          xhr.open("POST", _ep);
+          xhr.setRequestHeader('Content-Type', 'application/soap+xml');
+          xhr.setRequestHeader('action', _action);
+          xhr.send(body);
+        });
+      }
+
+    }
+
+    _KotakAPIModule.KotakHTTPAPI = KotakHTTPAPI;
+  })(KotakAPIModule || (KotakAPIModule = {}));
+
+  let KotakAPIWrapper;
+
+  (function (_KotakAPIWrapper) {
+    class KotakAPIWrapper {
+      constructor(endpoint) {
+        _defineProperty(this, "_api", void 0);
+
+        this._api = new KotakAPIModule.KotakHTTPAPI(endpoint);
+      }
+
+      registerPayment(parameters) {
+        var messageId = parameters["pMessageId"];
+        var msgSource = parameters["pMessageSource"];
+        var clientCode = parameters["pClientCode"];
+        var prodCode = "WPAY";
+        var payMode = "NEFT";
+        var transactionAmount = parameters["pTxnAmount"];
+        var accountNo = parameters["pAccountNo"];
+        var recBrCd = parameters["pRecBrCd"];
+        var paymentDt = parameters["pPaymentDt"];
+        var beneAcctNo = parameters["pBeneAccountNo"];
+        var drDesc = parameters["pDrDesc"];
+        var beneName = parameters["pBeneName"];
+        var instDt = parameters["pInstDate"];
+        var paymentDtl1 = parameters["pPaymentDtl1"];
+        var enrichment = parameters["pEnrichment"];
+        var paymentRequest = {
+          RequestHeader: {
+            MessageId: messageId,
+            MsgSource: msgSource,
+            ClientCode: clientCode,
+            BatchRefNmbr: messageId
+          },
+          InstrumentList: {
+            instrument: {
+              InstRefNo: messageId,
+              MyProdCode: prodCode,
+              PayMode: payMode,
+              TxnAmnt: transactionAmount,
+              AccountNo: accountNo,
+              DrDesc: drDesc,
+              PaymentDt: paymentDt,
+              RecBrCd: recBrCd,
+              BeneAcctNo: beneAcctNo,
+              BeneName: beneName,
+              InstDt: instDt,
+              PaymentDtl1: paymentDtl1,
+              EnrichmentSet: {
+                Enrichment: enrichment
+              }
+            }
+          }
+        };
+        return new Promise((resolve, reject) => {
+          this._api.registerPayment(paymentRequest).then(response => {
+            resolve(response);
+          }).catch(err => {
+            reject(err);
+          });
+        });
+      }
+
+      getPaymentState(parameters) {
+        var messageId = parameters["pMessageId"];
+        var msgSource = parameters["pMessageSource"];
+        var clientCode = parameters["pClientCode"];
+        var paymentStateRequest = {
+          Header: {
+            Req_Id: messageId,
+            Msg_Src: msgSource,
+            Client_Code: clientCode,
+            Date_Post: ""
+          },
+          Details: {
+            Msg_Id: messageId
+          }
+        };
+        return new Promise((resolve, reject) => {
+          this._api.getPaymentState(paymentStateRequest).then(response => {
+            resolve(response);
+          }).catch(err => {
+            reject(err);
+          });
+        });
+      }
+
+    }
+
+    _KotakAPIWrapper.KotakAPIWrapper = KotakAPIWrapper;
+  })(KotakAPIWrapper || (KotakAPIWrapper = {}));
+
+  metadata = {
+    systemName: "KotakBankAPI",
+    displayName: "Kotak Bank API",
+    description: "An example broker that accesses to Kotak Bank API.",
+    "configuration": {
+      "EndpointUrl": {
+        displayName: "Endpoint Url",
+        type: "string",
+        value: "https://apigwuat.kotak.com:8443/cms_generic_service?apikey=l7xx9e2c880d0b4549049ff62c5bf595c310"
+      },
+      "Param2": {
+        displayName: "Param2",
+        type: "string",
+        value: "param2 default value"
+      }
+    }
+  };
+
+  ondescribe = async function ({
+    configuration
+  }) {
+    postSchema({
+      objects: {
+        "KotakBankAPI": {
+          displayName: "Kotak Bank payment API",
+          description: "Kotak Bank payment API",
+          properties: {
+            "messageId": {
+              displayName: "messageId",
+              type: "string"
+            },
+            "statusCode": {
+              displayName: "statusCode",
+              type: "string"
+            },
+            "statusDescription": {
+              displayName: "statusDescription",
+              type: "string"
+            },
+            "errorCode": {
+              displayName: "errorCode",
+              type: "string"
+            },
+            "errorDescription": {
+              displayName: "errorDescription",
+              type: "string"
+            },
+            "debugRequest": {
+              displayName: "debugRequest",
+              type: "string"
+            },
+            "debugResponse": {
+              displayName: "debugResponse",
+              type: "string"
+            }
+          },
+          methods: {
+            "RegisterPayment": {
+              displayName: "Perform payment request",
+              type: "execute",
+              parameters: {
+                "pMessageId": {
+                  displayName: "pMessageId",
+                  description: "Message Id",
+                  type: "string"
+                },
+                "pMessageSource": {
+                  displayName: "pMessageSource",
+                  description: "Message Source",
+                  type: "string"
+                },
+                "pClientCode": {
+                  displayName: "pClientCode",
+                  description: "Client Code",
+                  type: "string"
+                },
+                "pTxnAmount": {
+                  displayName: "pTxnAmount",
+                  description: "Transaction amount",
+                  type: "number"
+                },
+                "pAccountNo": {
+                  displayName: "pAccountNo",
+                  description: "Account No",
+                  type: "string"
+                },
+                "pRecBrCd": {
+                  displayName: "pRecBrCd",
+                  description: "RecBrCd",
+                  type: "string"
+                },
+                "pPaymentDt": {
+                  displayName: "pPaymentDt",
+                  description: "Payment Date",
+                  type: "string"
+                },
+                "pBeneAccountNo": {
+                  displayName: "pBeneAccountNo",
+                  description: "Bene account No",
+                  type: "string"
+                },
+                "pDrDesc": {
+                  displayName: "pDrDesc",
+                  description: "DrDesc",
+                  type: "string"
+                },
+                "pBeneName": {
+                  displayName: "pBeneName",
+                  description: "BeneName",
+                  type: "string"
+                },
+                "pInstDate": {
+                  displayName: "pInstDate",
+                  description: "InstDt",
+                  type: "string"
+                },
+                "pPaymentDtl1": {
+                  displayName: "pPaymentDtl1",
+                  description: "pPaymentDtl1",
+                  type: "string"
+                },
+                "pEnrichment": {
+                  displayName: "pEnrichment",
+                  description: "pEnrichment",
+                  type: "string"
+                }
+              },
+              requiredParameters: ["pMessageId", "pMessageSource", "pClientCode", "pTxnAmount"],
+              outputs: ["messageId", "statusCode", "statusDescription", "errorCode", "errorDescription", "debugRequest", "debugResponse"]
+            },
+            "GetPaymentState": {
+              displayName: "Get payment state",
+              type: "read",
+              parameters: {
+                "pMessageId": {
+                  displayName: "pMessageId",
+                  description: "Message Id",
+                  type: "string"
+                },
+                "pMessageSource": {
+                  displayName: "pMessageSource",
+                  description: "Message Source",
+                  type: "string"
+                },
+                "pClientCode": {
+                  displayName: "pClientCode",
+                  description: "Client Code",
+                  type: "string"
+                }
+              },
+              requiredParameters: ["pMessageId", "pMessageSource", "pClientCode"],
+              outputs: ["messageId", "statusCode", "statusDescription", "errorCode", "errorDescription", "debugRequest", "debugResponse"]
+            }
+          }
+        }
+      }
+    });
+  };
+
+  onexecute = async function ({
+    objectName,
+    methodName,
+    parameters,
+    properties,
+    configuration,
+    schema
+  }) {
+    switch (objectName) {
+      case "KotakBankAPI":
+        await onexecuteKotakBank(methodName, properties, parameters, configuration);
+        break;
+
+      default:
+        throw new Error("The object " + objectName + " is not supported.");
+    }
+  };
+
+  async function onexecuteKotakBank(methodName, properties, parameters, configuration) {
+    switch (methodName) {
+      case "RegisterPayment":
+        await kotakRegisterPayment(parameters, configuration);
+        break;
+
+      case "GetPaymentState":
+        await kotakGetPaymentState(parameters, configuration);
+        break;
+
+      default:
+        throw new Error("The method " + methodName + " is not supported.");
+    }
+  }
+
+  function kotakRegisterPayment(parameters, configuration) {
+    var endpoint = configuration["EndpointUrl"];
+    return new Promise((resolve, reject) => {
+      var wrap = new KotakAPIWrapper.KotakAPIWrapper(endpoint);
+      wrap.registerPayment(parameters).then(response => {
+        console.log(response);
+        postResult(toK2Result(response));
+        resolve();
+      }).catch(err => {
+        console.log(err);
+        postResult(toK2Result(err));
+        reject(err);
+      });
+    });
+  }
+
+  function kotakGetPaymentState(parameters, configuration) {
+    var endpoint = configuration["EndpointUrl"];
+    return new Promise((resolve, reject) => {
+      var wrap = new KotakAPIWrapper.KotakAPIWrapper(endpoint);
+      wrap.getPaymentState(parameters).then(response => {
+        console.log(response);
+        postResult(toK2Result(response));
+        resolve();
+      }).catch(err => {
+        console.log(err);
+        postResult(toK2Result(err));
+        reject(err);
+      });
+    });
+  }
+
+  function toK2Result(response) {
+    return {
+      "messageId": response.messageId,
+      "statusCode": response.statusCode,
+      "statusDescription": response.statusDescription,
+      "errorCode": response.errorCode,
+      "errorDescription": response.errorDescription,
+      "debugRequest": response.debugRequest,
+      "debugResponse": response.debugResponse
+    };
+  }
+
+}());
 //# sourceMappingURL=index.js.map
